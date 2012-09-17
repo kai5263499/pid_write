@@ -1,0 +1,9 @@
+{
+  "name": "PidWrite",
+  "description": "Writes the PID to a lock file and then switches the owner of the process",
+  "author": "swright",
+  "dependencies": {
+  },
+  "engine": "node 0.8.6",
+  "version":"0.0.1"
+}
