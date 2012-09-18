@@ -1,6 +1,8 @@
 pid_write
 =========
 
+Install: npm install pid_write
+
 -- still in development so use at own risk.
 
 Writes the PID to a lock file and then switches the owner of the process
