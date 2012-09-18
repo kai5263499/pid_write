@@ -1,9 +1,14 @@
 {
-  "name": "pid_write",
-  "description": "Writes the PID to a lock file and then switches the owner of the process",
-  "author": "swright",
-  "dependencies": {
-  },
-  "engine": "node 0.8.6",
-  "version":"0.0.1"
+    "name": "pid_write",
+    "version":"0.0.1",
+    "description": "Writes the PID to a lock file and then switches the owner of the process",
+    "author": "swright",
+    "main": "pid_write.js",
+    "engines": {
+        "node":">= 0.8.6"
+    },
+    "dependencies": {
+    },
+    "homepage": "https://github.com/rhythmicdevil/write_pid.git",
+    "keywords" : ["pid", "write pid", "linux start scripts"]
 }
