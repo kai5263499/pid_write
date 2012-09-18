@@ -1,6 +1,4 @@
-```javascript
-var mycode = true;
-```
+
 write_pid
 =========
 
@@ -17,7 +15,7 @@ some Linux security stuff around user and program managment.
 2. I want the program to run as <user> not root
 
 Usage example:
-
+```javascript
 var Wp = require(__dirname + '/libs/' + 'write_pid/write_pid');
 Wp.write_pid('/var/lock/subsys/<pidfilename>', '<process_name>', function(err, pid){
     if(err){
@@ -28,7 +26,7 @@ Wp.write_pid('/var/lock/subsys/<pidfilename>', '<process_name>', function(err, p
         process.exit(1);
     }
 });
-
+```
 
 ToDo:
 
