@@ -11,7 +11,7 @@ exports.pid_write = function(pid_file, process_name, cb){
     /*
      * Write the PID to the pid_file
      */
-    Fs.writeFileync(pid_file, pid, function(err){
+    Fs.writeFile(pid_file, pid, function(err){
         if(err){
             cb(err);
         } else {
