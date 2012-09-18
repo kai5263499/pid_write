@@ -2,6 +2,8 @@ write_pid
 =========
 
 -- still in development so use at own risk.
+-- Not in NPM yet because I am waiting for them to sort out problem with my password. https://github.com/isaacs/npm/issues/2808
+
 
 Writes the PID to a lock file and then switches the owner of the process
 
