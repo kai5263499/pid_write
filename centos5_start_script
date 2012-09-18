@@ -1,0 +1,118 @@
+#! /bin/sh
+
+# For RedHat and cousins:
+# chkconfig: 2345 99 01
+# description: <Add a description>
+# processname: <The name of the running process> 
+
+### BEGIN INIT INFO
+# Provides: <Name of the process>
+# Required-Start: 
+# Required-Stop: 
+# Should-Start:
+# Short-Description: <Short description>
+# Description: <Long description>
+### END INIT INFO
+
+
+USER=root
+DAEMON=/usr/local/bin/node
+ROOT_DIR=<Base directory of your application>
+APPLICATION="$ROOT_DIR/<entry file of your application>"
+LOG_FILE="$ROOT_DIR/log.log"
+PID_FILE="/var/lock/subsys/<name your pid file>"
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+
+RETVAL=0
+
+#
+# Editing below here leads to madness
+#
+
+start()
+{
+    if [ ! -f "$PID_FILE" ] ; then
+	echo -ne $"Starting $APPLICATION: "
+        cd $ROOT_DIR
+	daemon "--user=$USER" "$DAEMON $APPLICATION &" && echo_success || echo_failure
+
+	RETVAL=$?
+
+	echo
+	[ $RETVAL = 0 ] && touch $PID_FILE
+	return $RETVAL
+   else
+        echo "$APPLICATION is locked."
+        RETVAL=1
+   fi
+}
+
+stop()
+{
+	echo -ne $"Shutting down $APPLICATION: \n"
+	echo -ne $"PID_FILE: $PID_FILE \n"
+	killproc -p $PID_FILE
+	RETVAL=$?
+	echo
+	rm -f $PID_FILE
+	return $RETVAL
+}
+
+reload()
+{
+	echo -n $"Reloading $prog daemon configuration: "
+	killproc $NOSCHEMA_CP -HUP
+	RETVAL=$?
+	echo
+	return $RETVAL
+}
+
+report()
+{
+	echo -n $"Checking NoSchema Control Panel now: "
+	killproc $NOSCHEMA_CP -USR1
+	RETVAL=$?
+	echo
+	return $RETVAL
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	reload)
+		reload
+		;;
+	report)
+		report
+		;;
+	restart)
+		stop
+		start
+		;;
+	try-restart)
+		if [ -f $PID_FILE ]; then
+			stop
+			start
+		fi
+		;;
+	force-reload)
+		reload || (stop; start)
+		;;
+	status)
+		status $prog
+		RETVAL=$?
+		;;
+	*)
+		echo $"Usage: $0 {start|stop|reload|force-reload|report|restart|try-restart|status}"
+		RETVAL=3
+esac
+
+exit $RETVAL
+
