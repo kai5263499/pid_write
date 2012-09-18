@@ -6,22 +6,20 @@ var Fs = require('fs');
  *  as root in order to write the PID
  * 
  */
-exports.write_pid = function(){
-    var pid_file = '/var/lock/subsys/noschema_cp';
+exports.write_pid = function(pid_file, process_name, cb){
     var pid = process.pid;
-    Fs.writeFile(pid_file, pid, function(err){
+    /*
+     * Write the PID to the pid_file
+     */
+    Fs.writeFileync(pid_file, pid, function(err){
         if(err){
-            Logger.log({
-                'log':'info', 
-                'msg' : 'Could not write PID',
-                'pid' : pid,
-                'pid_file': pid_file,
-                'error': err
-            });
-        } 
-        
-        process.setuid('noschema');
-        
+            cb(err);
+        } else {
+            /*
+             * Update the process owner
+             */
+            process.setuid(process_name);
+            cb(null, pid);
+        }
     });
-       
 }    

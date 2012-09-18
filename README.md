@@ -10,3 +10,24 @@ some Linux security stuff around user and program managment.
 
 1. Writing a PID file is only allowed by the root user
 2. I want the program to run as <user> not root
+
+Usage example:
+
+var Wp = require(__dirname + '/libs/' + 'write_pid/write_pid');
+Wp.write_pid('/var/lock/subsys/noschema_cp', 'noschema', function(err, pid){
+    if(err){
+        console.log('[ERROR]', {
+            'msg' : 'Could not create PID so exiting', 
+            'err' : err
+        });
+        process.exit(1);
+    }
+});
+
+
+ToDo:
+
+1. Possibly make this synchronous or give the option to be synchronous. 
+2. Find a way to have the pid file name and user given in the startup script
+    and write_pid() to be sourced from one location
+
