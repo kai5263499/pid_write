@@ -16,7 +16,7 @@ some Linux security stuff around user and program managment.
 Usage example:
 
 var Wp = require(__dirname + '/libs/' + 'write_pid/write_pid');
-Wp.write_pid('/var/lock/subsys/noschema_cp', 'noschema', function(err, pid){
+Wp.write_pid('/var/lock/subsys/<pidfilename>', '<process_name>', function(err, pid){
     if(err){
         console.log('[ERROR]', {
             'msg' : 'Could not create PID so exiting', 
