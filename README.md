@@ -1,3 +1,6 @@
+```javascript
+var mycode = true;
+```
 write_pid
 =========
 
