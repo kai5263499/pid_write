@@ -9,6 +9,6 @@
     },
     "dependencies": {
     },
-    "homepage": "https://github.com/rhythmicdevil/write_pid.git",
+    "homepage": "https://github.com/rhythmicdevil/pid_write",
     "keywords" : ["pid", "write pid", "linux start scripts"]
 }
