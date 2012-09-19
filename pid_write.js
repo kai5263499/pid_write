@@ -6,7 +6,7 @@ var Fs = require('fs');
  *  as root in order to write the PID
  * 
  */
-exports.pid_write = function(pid_file, process_name, cb){
+exports.pid_write = function(pid_file, process_names){
     var pid = process.pid;
     // Write the file synchronously so that the program does not execute anything
     // until the PID and GUID are set.
@@ -15,6 +15,4 @@ exports.pid_write = function(pid_file, process_name, cb){
     process.setgid(process_name);
     // Now change the user
     process.setuid(process_name);
-    cb(null, pid);
-    
 }    
