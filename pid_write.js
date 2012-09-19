@@ -8,18 +8,13 @@ var Fs = require('fs');
  */
 exports.pid_write = function(pid_file, process_name, cb){
     var pid = process.pid;
-    /*
-     * Write the PID to the pid_file
-     */
-    Fs.writeFile(pid_file, pid, function(err){
-        if(err){
-            cb(err);
-        } else {
-            /*
-             * Update the process owner
-             */
-            process.setuid(process_name);
-            cb(null, pid);
-        }
-    });
+    // Write the file synchronously so that the program does not execute anything
+    // until the PID and GUID are set.
+    Fs.writeFileSync(pid_file, pid, 'utf8');
+    // Must happen first because you cannot change group as a user other than root
+    process.setgid(process_name);
+    // Now change the user
+    process.setuid(process_name);
+    cb(null, pid);
+    
 }    
