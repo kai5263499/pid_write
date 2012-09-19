@@ -15,8 +15,8 @@ some Linux security stuff around user and program managment.
 
 Usage example:
 ```javascript
-var Wp = require(__dirname + '/libs/' + 'write_pid/write_pid');
-Wp.pid_write('/var/lock/subsys/<pidfilename>', '<process_name>', function(err, pid){
+var Pw = require('pid_write');
+Pw.pid_write('/var/lock/subsys/<pidfilename>', '<process_name>', function(err, pid){
     if(err){
         console.log('[ERROR]', {
             'msg' : 'Could not create PID so exiting', 
@@ -29,7 +29,6 @@ Wp.pid_write('/var/lock/subsys/<pidfilename>', '<process_name>', function(err, p
 
 ToDo:
 
-1. Possibly make this synchronous or give the option to be synchronous. 
-2. Find a way to have the pid file name and user given in the startup script
+1. Find a way to have the pid file name and user given in the startup script
     and write_pid() to be sourced from one location
 
